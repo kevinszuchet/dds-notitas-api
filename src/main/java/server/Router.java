@@ -12,13 +12,17 @@ import javax.persistence.RollbackException;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
+import com.auth0.jwt.JWT;
+
+import server.controller.AlumnoController;
+import server.security.InvalidTokenException;
 import server.security.SecurityService;
 
 public class Router implements TransactionalOps, WithGlobalEntityManager {
 	
 	EntityManager em = entityManager();
 	
-	public void configure() {
+	public void configure() {		
 		SecurityService securityService = new SecurityService("god");
 		
 		Spark.before((req, res) -> {
@@ -28,8 +32,8 @@ public class Router implements TransactionalOps, WithGlobalEntityManager {
 			
 			try {
 				Long userId = securityService.user(req.headers("Authorization").replace("Bearer ", ""));
-				//Hacer algo con el id...
-			} catch (Exception e) {
+				// Hacer algo con el id...
+			} catch (InvalidTokenException e) {
 				if (req.requestMethod() != "GET") {
 					rollbackTransaction();
 				}
@@ -38,7 +42,11 @@ public class Router implements TransactionalOps, WithGlobalEntityManager {
 			}
 		});
 
-		Spark.get("/", (req, res) -> "Holiiiiii");
+		Spark.get("/", (req, res) -> "Hello world!");
+		
+		Spark.get("/student", AlumnoController::getAlumno);
+		
+		Spark.post("/student", AlumnoController::modificarAlumno);
 		
 		Spark.after((req, res) -> {
 			if(req.requestMethod() != "GET") {
