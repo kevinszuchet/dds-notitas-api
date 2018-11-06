@@ -19,9 +19,9 @@ public class RepoAlumnos extends RepoEnDB<Alumno> {
 		return instancia;
 	}
 	
-	public Alumno obtenerXtoken(String token) {
+	public Alumno obtenerXId(Long id) {
 		try {
-			return (Alumno) em.createQuery("FROM Alumno a WHERE a.secretCode = :token", Alumno.class).setParameter("token", token).getSingleResult();
+			return (Alumno) em.createQuery("FROM Alumno a WHERE a.id = :id", Alumno.class).setParameter("id", id).getSingleResult();
 		} catch(NoResultException e) {
 			return null;
 		}

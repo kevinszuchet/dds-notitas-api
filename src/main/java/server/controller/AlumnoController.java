@@ -11,8 +11,8 @@ public class AlumnoController {
 	
 	private static final JSONParser<Alumno> parserAlumnos = new JSONParser<Alumno>();
 	
-	private static Alumno obtenerAlumnoSiExiste(String token) {
-		Alumno alumno = RepoAlumnos.getInstance().obtenerXtoken(token);
+	private static Alumno obtenerAlumnoSiExiste(Long id) {
+		Alumno alumno = RepoAlumnos.getInstance().obtenerXId(id);
 		
 		if (alumno == null) {
 			Spark.halt(401, "Me mandaste cualquier cosaa, no te hagas el gil");
@@ -23,12 +23,12 @@ public class AlumnoController {
 	
 	public static String getAlumno(Request req, Response res) {
 		
-		Alumno alumno = obtenerAlumnoSiExiste(req.headers("Authorization").replace("Bearer ", ""));		
+		Alumno alumno = obtenerAlumnoSiExiste((Long) req.session().attribute("userIdSession"));		
 		return parserAlumnos.objectToJson(alumno);
 	}
 	
 	public static String modificarAlumno(Request req, Response res) {
-		Alumno alumnoActual = obtenerAlumnoSiExiste(req.headers("Authorization").replace("Bearer ", ""));		
+		Alumno alumnoActual = obtenerAlumnoSiExiste(req.session().attribute("userIdSession"));		
 		Alumno alumnoNuevo = parserAlumnos.jsonToObject("", Alumno.class);
 		
 		alumnoActual.setNombre(alumnoNuevo.getNombre());

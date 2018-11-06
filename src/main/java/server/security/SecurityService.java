@@ -9,11 +9,11 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 
 public class SecurityService {
 
-	private String secret;
+	private static String secret = "secretCode";
 
-	public SecurityService(String secret) {
-		this.secret = secret;
-	}
+//	public SecurityService(String secret) {
+//		this.secret = secret;
+//	}
 	
 	public Long user(String token) {
 		try {
@@ -24,6 +24,11 @@ public class SecurityService {
 		} catch (JWTVerificationException e) {
 			throw new InvalidTokenException(e);
 		}
+	}
+	
+	public String generateTokenFor(Long idEstudiante) {
+		Algorithm algorithm = Algorithm.HMAC256(secret);
+		return JWT.create().withClaim("user", idEstudiante).sign(algorithm);
 	}
 
 }

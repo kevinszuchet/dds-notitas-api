@@ -29,16 +29,19 @@ public class Alumno {
 	@SuppressWarnings("unused")
 	private Alumno() {}
 	
-	public Alumno(String legajo, String nombre, String email, String githubUser, String apellido, String secretCode) {
+	public Alumno(String legajo, String nombre, String email, String githubUser, String apellido) {
 		super();
 		this.legajo = legajo;
 		this.nombre = nombre;
 		this.email = email;
 		this.githubUser = githubUser;
 		this.apellido = apellido;
-		this.secretCode = secretCode;
 	}
-
+	
+	public Long getId() {
+		return id;
+	}
+	
 	public String getLegajo() {
 		return legajo;
 	}
