@@ -18,7 +18,6 @@ public class Alumno {
 	private String legajo;
 	private String nombre;
 	private String apellido;
-	private String secretCode;
 	private String email;
 	private String githubUser;
 	
@@ -66,14 +65,6 @@ public class Alumno {
 		this.apellido = apellido;
 	}
 
-	public String getSecretCode() {
-		return secretCode;
-	}
-
-	public void setSecretCode(String secretCode) {
-		this.secretCode = secretCode;
-	}
-	
 	public void asignarTarea(Tarea tarea) {
 		this.asignaciones.add(new Asignacion(tarea));
 	}
