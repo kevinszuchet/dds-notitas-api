@@ -29,12 +29,13 @@ public class AlumnoController {
 	
 	public static String modificarAlumno(Request req, Response res) {
 		Alumno alumnoActual = obtenerAlumnoSiExiste(req.session().attribute("userIdSession"));		
-		Alumno alumnoNuevo = parserAlumnos.jsonToObject("", Alumno.class);
+		Alumno alumnoNuevo = parserAlumnos.jsonToObject(req.body(), Alumno.class);
 		
-		alumnoActual.setNombre(alumnoNuevo.getNombre());
-		alumnoActual.setApellido(alumnoNuevo.getApellido());
-		alumnoActual.setGithubUser(alumnoNuevo.getGithubUser());
+		alumnoActual.setNombre(alumnoNuevo.getNombre() != null ? alumnoNuevo.getNombre() : alumnoActual.getNombre());
+		alumnoActual.setEmail(alumnoNuevo.getEmail() != null ? alumnoNuevo.getEmail() : alumnoActual.getEmail());
+		alumnoActual.setApellido(alumnoNuevo.getApellido() != null ? alumnoNuevo.getApellido() : alumnoActual.getApellido());
+		alumnoActual.setGithubUser(alumnoNuevo.getGithubUser() != null ? alumnoNuevo.getGithubUser() : alumnoActual.getGithubUser());
 		
-		return null;
+		return "OK";
 	}
 }
