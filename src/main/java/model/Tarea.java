@@ -14,7 +14,7 @@ public class Tarea {
 	
 	private Date fechaLimiteDeEntrega;
 	private String enunciado;
-	
+	public Tarea() {}
 	public Tarea(Date fechaLimiteDeEntrega, String enunciado) {
 		super();
 		this.fechaLimiteDeEntrega = fechaLimiteDeEntrega;

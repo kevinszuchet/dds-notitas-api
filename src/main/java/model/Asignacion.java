@@ -20,7 +20,7 @@ public class Asignacion {
 	
 	@ManyToOne
 	private Tarea tarea;
-	
+	public Asignacion() {}
 	public Asignacion(Tarea tarea) {
 		this.tarea = tarea;
 		this.notas = new ArrayList<>();
