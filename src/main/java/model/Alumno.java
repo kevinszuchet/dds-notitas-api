@@ -65,10 +65,17 @@ public class Alumno {
 		this.apellido = apellido;
 	}
 
-	public void asignarTarea(Tarea tarea) {
-		this.asignaciones.add(new Asignacion(tarea));
+	public void asignarTarea(String nombreDeAsignacion, Tarea tarea) {
+		this.asignaciones.add(new Asignacion(nombreDeAsignacion,tarea));
 	}
 
+	public void setAsignacion(Asignacion asignacion) {
+		this.asignaciones.add(asignacion);
+	}
+	
+	public List<Asignacion> getAsignaciones(){
+		return asignaciones;
+	}
 	public String getEmail() {
 		return email;
 	}

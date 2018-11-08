@@ -1,8 +1,10 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,13 +17,16 @@ public class Asignacion {
 	@Id @GeneratedValue
 	private Long id;
 	
-	@Transient
+	String nombre;
+	
+	@ElementCollection
 	private List<String> notas;	
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Tarea tarea;
 	public Asignacion() {}
-	public Asignacion(Tarea tarea) {
+	public Asignacion(String nombre, Tarea tarea) {
+		this.nombre = nombre;
 		this.tarea = tarea;
 		this.notas = new ArrayList<>();
 	}
