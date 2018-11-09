@@ -10,6 +10,6 @@ public class AlumnoAsignacionesToJsonTransformer implements ResponseTransformer{
 
 	@Override
 	public String render(Object asignaciones) {
-		return new JSONParser<Asignacion>().listToJson((List<Asignacion>) asignaciones);
+		return new JSONParser<List<Asignacion>>().objectToJson((List<Asignacion>) asignaciones);
 	}
 }

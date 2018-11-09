@@ -1,6 +1,5 @@
 package json;
 import java.io.IOException;
-import java.util.List;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -35,23 +34,6 @@ public class JSONParser<Entidad> {
 		
 		try {
 			json = mapper.writeValueAsString(entidad);
-		} catch (JsonParseException e) {
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return json;
-	}
-	
-	public String listToJson(List<Entidad> entidades) {
-
-		String json = ""; 
-		
-		try {
-			json = mapper.writeValueAsString(entidades);
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {

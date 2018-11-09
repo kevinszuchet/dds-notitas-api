@@ -1,18 +1,12 @@
 package server;
 
 import spark.Spark;
-import spark.template.handlebars.HandlebarsTemplateEngine;
-
-import static spark.Spark.before;
-import static spark.Spark.staticFiles;
 
 import javax.persistence.EntityManager;
 import javax.persistence.RollbackException;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
-
-import com.auth0.jwt.JWT;
 
 import server.controller.AlumnoController;
 import server.security.InvalidTokenException;
