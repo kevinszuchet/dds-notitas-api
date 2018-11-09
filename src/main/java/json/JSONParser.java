@@ -13,8 +13,7 @@ public class JSONParser<Entidad> {
 	
 	ObjectMapper mapper = new ObjectMapper().registerModule(new ParameterNamesModule()).registerModule(new Jdk8Module()).registerModule(new JavaTimeModule());
 	
-	public Entidad jsonToObject(String json, Class<Entidad> tipoEntidad) {
-		
+	public Entidad jsonToObject(String json, Class<Entidad> tipoEntidad) {		
 		Entidad elemento = null;
 		
 		try {

@@ -2,6 +2,9 @@ package server.controller;
 
 import spark.Response;
 import spark.Spark;
+
+import java.util.List;
+
 import json.JSONParser;
 import model.Alumno;
 import model.Asignacion;
@@ -10,10 +13,7 @@ import spark.Request;
 
 public class AlumnoController {
 	
-	private static final JSONParser<Alumno> parserAlumnos = new JSONParser<Alumno>();
-	private static final JSONParser<Asignacion> parserAsignaciones = new JSONParser<Asignacion>();
-
-	
+	private static final JSONParser<Alumno> parserAlumnos = new JSONParser<Alumno>();	
 	
 	private static Alumno obtenerAlumnoSiExiste(Long id) {
 		Alumno alumno = RepoAlumnos.getInstance().obtenerXId(id);
@@ -25,10 +25,8 @@ public class AlumnoController {
 		return alumno;		
 	}
 	
-	public static String getAlumno(Request req, Response res) {
-		
-		Alumno alumno = obtenerAlumnoSiExiste((Long) req.session().attribute("userIdSession"));		
-		return parserAlumnos.objectToJson(alumno);
+	public static Alumno getAlumno(Request req, Response res) {		
+		return obtenerAlumnoSiExiste((Long) req.session().attribute("userIdSession"));
 	}
 	
 	public static String modificarAlumno(Request req, Response res) {
@@ -43,10 +41,8 @@ public class AlumnoController {
 		return "OK";
 	}
 	
-	public static String getAsignaciones(Request req, Response res) {
-		Alumno alumno = obtenerAlumnoSiExiste(req.session().attribute("userIdSession"));
-		
-		return parserAsignaciones.listToJson(alumno.getAsignaciones());
+	public static List<Asignacion> getAsignaciones(Request req, Response res) {
+		return obtenerAlumnoSiExiste(req.session().attribute("userIdSession")).getAsignaciones();
 	}
 	
 }

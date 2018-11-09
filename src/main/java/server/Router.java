@@ -17,6 +17,8 @@ import com.auth0.jwt.JWT;
 import server.controller.AlumnoController;
 import server.security.InvalidTokenException;
 import server.security.SecurityService;
+import server.transformer.AlumnoAsignacionesToJsonTransformer;
+import server.transformer.AlumnoToJsonTransformer;
 
 public class Router implements TransactionalOps, WithGlobalEntityManager {
 	
@@ -44,9 +46,9 @@ public class Router implements TransactionalOps, WithGlobalEntityManager {
 
 		Spark.get("/", (req, res) -> "Hello world!");
 		
-		Spark.get("/student", AlumnoController::getAlumno);
+		Spark.get("/student", AlumnoController::getAlumno, new AlumnoToJsonTransformer());		
 		
-		Spark.get("/student/asignaciones", AlumnoController::getAsignaciones);
+		Spark.get("/student/asignaciones", AlumnoController::getAsignaciones, new AlumnoAsignacionesToJsonTransformer());
 		
 		Spark.patch("/student", AlumnoController::modificarAlumno);
 		
